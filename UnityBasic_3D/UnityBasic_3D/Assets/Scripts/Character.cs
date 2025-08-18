@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Char : MonoBehaviour
+public class Character : MonoBehaviour
 {
     Animator animator;
     float speed;
