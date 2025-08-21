@@ -10,7 +10,6 @@ using UnityEngine;
 
 public class Player : Battle
 {
-
     //public BattleEntity battleEntity;
 
     ////public int playerHP;
@@ -24,6 +23,7 @@ public class Player : Battle
 
     //    Debug.Log($"HP : {battleEntity.HP}, ATK : {battleEntity.ATK}, DEF : {battleEntity.DEF}");
     //}
+
     public override void Attack(Battle other)
     {
         if (!battleManager.playerTurn) return;
@@ -33,14 +33,32 @@ public class Player : Battle
         battleManager.TurnChange();
     }
 
+    public override void Attack2(Battle other)
+    {
+        if (!battleManager.playerTurn) return;
+
+        base.Attack2(other);
+
+        battleManager.TurnChange(); // player턴을 넘겨라
+    }
+
     //public override void Attack()
     //{
     //    if (!battleManager.playerTurn) return;
 
-    //    //base.Attack();
+    //    base.Attack();
 
     //    battleManager.TurnChange(); // player턴을 넘겨라
     //}
+
+    public override void Defend(int amount)
+    {
+        if (!battleManager.playerTurn) return;
+
+        base.Defend(amount);
+
+        battleManager.TurnChange();
+    }
 
     public override void Recover(int amount)
     {

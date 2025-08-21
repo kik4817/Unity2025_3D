@@ -31,7 +31,7 @@ public class BattleManager : MonoBehaviour
     public void EnemyAI()
     {
         // 랜덤으로 0~2 숫자를 받아온다.
-        int RandomValue = UnityEngine.Random.Range(0, 3);
+        int RandomValue = UnityEngine.Random.Range(0, 4);
         //Debug.Log($"랜덤 값의 정확성 확인 {RandomValue}");
 
         switch(RandomValue)
@@ -40,10 +40,10 @@ public class BattleManager : MonoBehaviour
                 Enemy.Attack(Player);
                 break;
             case 1:
-                Enemy.Recover(10);
+                Enemy.Defend(5);
                 break;
             case 2:
-                Enemy.ShieldUP(5);
+                Enemy.Recover(10);
                 break;
             default:
                 break;

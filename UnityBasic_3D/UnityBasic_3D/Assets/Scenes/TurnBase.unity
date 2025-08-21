@@ -737,7 +737,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: AttackUP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1271,7 +1271,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1550032046}
-        m_TargetAssemblyTypeName: Battle, Assembly-CSharp
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: Recover
         m_Mode: 3
         m_Arguments:
@@ -1333,7 +1333,7 @@ GameObject:
   - component: {fileID: 582375391}
   - component: {fileID: 582375390}
   m_Layer: 5
-  m_Name: Attack -Button (1)
+  m_Name: Attack(SP) -Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1405,12 +1405,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1550032046}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Attack
+        m_MethodName: Attack2
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1409773128}
           m_ObjectArgumentAssemblyTypeName: Battle, Assembly-CSharp
-          m_IntArgument: 50
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1748,7 +1748,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: HPUP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2618,7 +2618,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Attack
+  m_text: Attack(SP)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2794,12 +2794,12 @@ RectTransform:
   m_Children:
   - {fileID: 1267529794}
   - {fileID: 582375389}
+  - {fileID: 2130153435}
   - {fileID: 573848470}
-  - {fileID: 48090974}
-  - {fileID: 1056692763}
   - {fileID: 1827785736}
   - {fileID: 1365002744}
-  - {fileID: 2130153435}
+  - {fileID: 1056692763}
+  - {fileID: 48090974}
   m_Father: {fileID: 1537783528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3179,7 +3179,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1409773128}
           m_ObjectArgumentAssemblyTypeName: Battle, Assembly-CSharp
-          m_IntArgument: 50
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3508,18 +3508,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleEntity:
     HP: 100
-    ATK: 30
-    DEF: 2
+    SP: 50
+    ATK: 20
+    DEF: 5
     AttackType: Normal
   battleUI:
     HPBar: {fileID: 536389058}
     SPBar: {fileID: 1062942706}
     BattleEntityHPText: {fileID: 1386219362}
+    BattleEntitySPText: {fileID: 1876582149}
     BattleEntityATKText: {fileID: 956682167}
     BattleEntityDEFText: {fileID: 1683725711}
     BattleEntityCoinText: {fileID: 0}
   battleManager: {fileID: 533613153}
   currentHP: 0
+  currentSP: 0
 --- !u!4 &1409773129
 Transform:
   m_ObjectHideFlags: 0
@@ -3667,18 +3670,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleEntity:
     HP: 150
+    SP: 100
     ATK: 30
-    DEF: 5
+    DEF: 10
     AttackType: Special
   battleUI:
     HPBar: {fileID: 1625516124}
     SPBar: {fileID: 373291876}
     BattleEntityHPText: {fileID: 156150062}
+    BattleEntitySPText: {fileID: 1995752622}
     BattleEntityATKText: {fileID: 1199476592}
     BattleEntityDEFText: {fileID: 494071719}
     BattleEntityCoinText: {fileID: 1050062808}
   battleManager: {fileID: 533613153}
   currentHP: 0
+  currentSP: 0
 --- !u!4 &1550032047
 Transform:
   m_ObjectHideFlags: 0
@@ -3827,7 +3833,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Defend
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4181,7 +4187,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1690781934}
-  - component: {fileID: 1690781933}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -4189,32 +4194,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1690781933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690781932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95538fe8c9868204691f8e41409abc45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  battleEntity:
-    HP: 0
-    ATK: 0
-    DEF: 0
-    AttackType: 
-  battleUI:
-    HPBar: {fileID: 0}
-    SPBar: {fileID: 0}
-    BattleEntityHPText: {fileID: 0}
-    BattleEntityATKText: {fileID: 0}
-    BattleEntityDEFText: {fileID: 0}
-    BattleEntityCoinText: {fileID: 0}
-  battleManager: {fileID: 0}
-  currentHP: 0
 --- !u!4 &1690781934
 Transform:
   m_ObjectHideFlags: 0
@@ -4363,7 +4342,7 @@ GameObject:
   - component: {fileID: 1876582150}
   - component: {fileID: 1876582149}
   m_Layer: 5
-  m_Name: EnemyHP - Text (TMP)
+  m_Name: EnemySP - Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4435,8 +4414,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4497,7 +4476,7 @@ GameObject:
   - component: {fileID: 1995752623}
   - component: {fileID: 1995752622}
   m_Layer: 5
-  m_Name: PlayerHP - Text (TMP)
+  m_Name: PlayerSP - Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4569,8 +4548,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4766,7 +4745,7 @@ GameObject:
   - component: {fileID: 2130153437}
   - component: {fileID: 2130153436}
   m_Layer: 5
-  m_Name: Run - Button
+  m_Name: Defend - Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4835,7 +4814,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2130153437}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1550032046}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Defend
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2130153437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4931,7 +4922,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: SPUP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

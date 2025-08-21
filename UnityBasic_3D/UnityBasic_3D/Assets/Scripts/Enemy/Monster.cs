@@ -16,16 +16,24 @@ public class Monster : Battle
         other.TakeDamge(this);
     }
 
+
     //public override void Attack()
     //{
     //    // battleManager에서 player턴이라면 실행하지 마세요.
-    //    if (!battleManager.playerTurn) return;
+    //    if (battleManager.playerTurn) return;
+
 
     //    base.Attack(); // 몬스터의 공격 로직을 실행 후.
-    //    Debug.Log("Battle Attack!");
 
     //    // battleManager에서 턴을 종료합니다. - 몬스터는 할 필요가 없다.       
     //}
+
+    public override void Defend(int amount)
+    {
+        if (battleManager.playerTurn) return;
+
+        base.Defend(amount);
+    }
 
     public override void Recover(int amount)
     {
@@ -34,12 +42,12 @@ public class Monster : Battle
         base.Recover(amount);
     }
 
-    public override void ShieldUP(int amount)
-    {
-        if (battleManager.playerTurn) return; 
+    //public override void ShieldUP(int amount)
+    //{
+    //    if (battleManager.playerTurn) return; 
 
-        base.ShieldUP(amount);
-    }
+    //    base.ShieldUP(amount);
+    //}
 
     
 }
