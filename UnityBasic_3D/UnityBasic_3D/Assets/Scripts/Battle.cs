@@ -31,15 +31,17 @@ public class BattleEntity
 public class BattleUI
 {
     public Image HPBar;
+    public Image SPBar;
     public TextMeshProUGUI BattleEntityHPText;
     public TextMeshProUGUI BattleEntityATKText;
     public TextMeshProUGUI BattleEntityDEFText;
+    public TextMeshProUGUI BattleEntityCoinText;
         
     public void SetBattleUI(BattleEntity battleEntity)
     {
         BattleEntityHPText.SetText($"HP : {battleEntity.HP}");
         BattleEntityATKText.SetText($"ATK : {battleEntity.ATK}");
-        BattleEntityDEFText.SetText($"DEF : {battleEntity.DEF}");       
+        BattleEntityDEFText.SetText($"DEF : {battleEntity.DEF}");     
     }
 
     public void SetHPBar(int current, int max)
@@ -48,8 +50,23 @@ public class BattleUI
                 
     }
 }
-public class Battle : MonoBehaviour
+
+// abstract class : 추상 클래스
+// 이 클래스를 인스턴스 할 수 없다
+// 이 클래스를 오브젝트의 컴포넌트로 사용하지 마세요
+// Player, Monster를 사용해서 이 클래스를 구현하라.
+// 메소드에 abstract 키워드를 추가할 수 있다.
+
+/*
+ * abstract vs virtual
+ * 
+ * abstract 추상 함수 : 분문을 가질 수 없다. - 자식 클래스에서 구현을 강제한다.
+ * 
+ * virtual 가상 함수 : 본문을 가질 수 있습니다. 자식 클래스에서 이 코드를 사용을 안할 수도 있고, base키워드를 사용해서 사용할 수 있다.
+ */
+public abstract class Battle : MonoBehaviour
 {
+    
     public BattleEntity battleEntity;
     public BattleUI battleUI;
 
@@ -57,7 +74,6 @@ public class Battle : MonoBehaviour
     //public int playerATK;
     //public int playerDEF;
     public BattleManager battleManager;
-    public bool IsPlayer;
    
     public int CurrentHP
     {
@@ -100,6 +116,7 @@ public class Battle : MonoBehaviour
     void Update()
     {
         battleUI.SetHPBar(CurrentHP, battleEntity.HP);
+     
     }
 
     // 상대에게 데미지를 받는다 (TakeDamage) :: CurrentHP - (ATK 방어력에 따라서 감소)
@@ -133,25 +150,18 @@ public class Battle : MonoBehaviour
         Debug.Log($"사망했습니다. 현재 체력 : {currentHP}");
     }
 
-    public void Attack()
-    {
+    public abstract void Attack(Battle other);
 
-    }
-    public void Recover(int amount)
+    public virtual void Recover(int amount)
     {
-        if (IsPlayer && !battleManager.playerTurn) return;
-
         CurrentHP += amount;
         //battleManager.TurnChange();
     }
 
-    public void ShieldUP(int amount)
+    public virtual void ShieldUP(int amount)
     {
-        if (IsPlayer && !battleManager.playerTurn) return;
-
         battleEntity.DEF += amount;
         battleUI.SetBattleUI(battleEntity);
         //battleManager.TurnChange();
     }
-
 }

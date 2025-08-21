@@ -24,12 +24,39 @@ public class Player : Battle
 
     //    Debug.Log($"HP : {battleEntity.HP}, ATK : {battleEntity.ATK}, DEF : {battleEntity.DEF}");
     //}
+    public override void Attack(Battle other)
+    {
+        if (!battleManager.playerTurn) return;
 
-    //// Update is called once per frame
-    //void Update()
+        other.TakeDamge(this);
+
+        battleManager.TurnChange();
+    }
+
+    //public override void Attack()
     //{
+    //    if (!battleManager.playerTurn) return;
 
+    //    //base.Attack();
+
+    //    battleManager.TurnChange(); // player턴을 넘겨라
     //}
 
+    public override void Recover(int amount)
+    {
+        if (!battleManager.playerTurn) return;
 
+        base.Recover(amount);
+
+        battleManager.TurnChange();
+    }
+
+    public override void ShieldUP(int amount)
+    {
+        if (!battleManager.playerTurn) return;
+
+        base.ShieldUP(amount);
+
+        battleManager.TurnChange();
+    }
 }
