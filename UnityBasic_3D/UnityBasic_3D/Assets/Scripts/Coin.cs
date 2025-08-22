@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Coin
-{
+{   
+    public void coin()
+    {
 
+    }
 }

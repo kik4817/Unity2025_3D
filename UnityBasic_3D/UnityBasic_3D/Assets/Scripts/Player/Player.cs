@@ -8,98 +8,101 @@ using UnityEngine;
 // 직열화 (Serialized) : 우리가 직접 정의한 클래스 정보를 유니티에서 읽어올 수 없기 때문에 유니티 인스팩터창에서 노출할 수 없다
 // 유니티가 우리가 정의한 정보를 읽을 수 있도록 조치를 취하면 된다.
 
-public class Player : Battle
+namespace BattleExample
 {
-    //public BattleEntity battleEntity;
-
-    ////public int playerHP;
-    ////public int playerATK;
-    ////public int playerDEF;
-
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-    //    //battleEntity = new BattleEntity(playerHP, playerATK, playerDEF);
-
-    //    Debug.Log($"HP : {battleEntity.HP}, ATK : {battleEntity.ATK}, DEF : {battleEntity.DEF}");
-    //}
-
-    public override void Attack(Battle other)
+    public class Player : Battle
     {
-        if (!battleManager.playerTurn) return;
+        //public BattleEntity battleEntity;
 
-        other.TakeDamge(this);
+        ////public int playerHP;
+        ////public int playerATK;
+        ////public int playerDEF;
 
-        battleManager.TurnChange();
-    }
+        //// Start is called before the first frame update
+        //void Start()
+        //{
+        //    //battleEntity = new BattleEntity(playerHP, playerATK, playerDEF);
 
-    public override void AttackSP(Battle other)
-    {
-        if (!battleManager.playerTurn) return;
+        //    Debug.Log($"HP : {battleEntity.HP}, ATK : {battleEntity.ATK}, DEF : {battleEntity.DEF}");
+        //}
 
-        base.AttackSP(other);
+        public override void Attack(Battle other)
+        {
+            if (!battleManager.playerTurn) return;
 
-        battleManager.TurnChange(); // player턴을 넘겨라
-    }
+            other.TakeDamge(this);
 
+            battleManager.TurnChange();
+        }
 
-    //public override void Attack()
-    //{
-    //    if (!battleManager.playerTurn) return;
+        public override void AttackSP(Battle other)
+        {
+            if (!battleManager.playerTurn) return;
 
-    //    base.Attack();
+            base.AttackSP(other);
 
-    //    battleManager.TurnChange(); // player턴을 넘겨라
-    //}
-
-    public override void Defend(int amount)
-    {
-        if (!battleManager.playerTurn) return;
-
-        base.Defend(amount);
-
-        battleManager.TurnChange();
-    }
+            battleManager.TurnChange(); // player턴을 넘겨라
+        }
 
 
-    public override void Recover(int HpAmount)//, int SpAmount)
-    {
-        if (!battleManager.playerTurn) return;
+        //public override void Attack()
+        //{
+        //    if (!battleManager.playerTurn) return;
 
-        base.Recover(HpAmount);//, SpAmount);
+        //    base.Attack();
 
-        battleManager.TurnChange();
-    }
-    public override void HpUp(int amount)
-    {
-        if (!battleManager.playerTurn) return;
+        //    battleManager.TurnChange(); // player턴을 넘겨라
+        //}
 
-        base.HpUp(amount);
+        public override void Defend(int amount)
+        {
+            if (!battleManager.playerTurn) return;
 
-        battleManager.TurnChange();
-    }
-    public override void SpUp(int amount)
-    {
-        if (!battleManager.playerTurn) return;
+            base.Defend(amount);
 
-        base.SpUp(amount);
+            battleManager.TurnChange();
+        }
 
-        battleManager.TurnChange();
-    }
-    public override void AttackUp(int amount)
-    {
-        if (!battleManager.playerTurn) return;
 
-        base.AttackUp(amount);
+        public override void Recover(int HpAmount)//, int SpAmount)
+        {
+            if (!battleManager.playerTurn) return;
 
-        battleManager.TurnChange();
-    }
-    public override void ShieldUP(int amount)
-    {
-        if (!battleManager.playerTurn) return;
+            base.Recover(HpAmount);//, SpAmount);
 
-        base.ShieldUP(amount);
+            battleManager.TurnChange();
+        }
+        public override void HpUp(int amount)
+        {
+            if (!battleManager.playerTurn) return;
 
-        battleManager.TurnChange();
-    }
+            base.HpUp(amount);
+
+            battleManager.TurnChange();
+        }
+        public override void SpUp(int amount)
+        {
+            if (!battleManager.playerTurn) return;
+
+            base.SpUp(amount);
+
+            battleManager.TurnChange();
+        }
+        public override void AttackUp(int amount)
+        {
+            if (!battleManager.playerTurn) return;
+
+            base.AttackUp(amount);
+
+            battleManager.TurnChange();
+        }
+        public override void ShieldUP(int amount)
+        {
+            if (!battleManager.playerTurn) return;
+
+            base.ShieldUP(amount);
+
+            battleManager.TurnChange();
+        }
+    } 
 }

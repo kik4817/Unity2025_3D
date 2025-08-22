@@ -74,6 +74,21 @@ public class BattleUI
  * 
  * virtual 가상 함수 : 본문을 가질 수 있습니다. 자식 클래스에서 이 코드를 사용을 안할 수도 있고, base키워드를 사용해서 사용할 수 있다.
  */
+
+[System.Serializable]
+public struct BattleResource
+{
+    public int HP;
+    public int SP;
+
+    public BattleResource(int hP, int sP)
+    {
+        HP = hP;
+        SP = sP;
+    }
+}
+
+
 public abstract class Battle : MonoBehaviour
 {
     
@@ -201,10 +216,10 @@ public abstract class Battle : MonoBehaviour
         isDefending = true;
     }
 
-    public virtual void Recover(int HpAmount)//, int SpAmount)
+    public virtual void Recover(int HpAmounte)//, int SpAmount)
     {
-        CurrentHP += HpAmount;        
-        //CurrentSP += SpAmount;        
+        CurrentHP += HpAmounte;
+        //CurrentSP += SpAmounte;
     }
 
     public virtual void HpUp(int amount)
