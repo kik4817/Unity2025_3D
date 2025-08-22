@@ -16,6 +16,14 @@ public class Monster : Battle
         other.TakeDamge(this);
     }
 
+    public override void AttackSP(Battle other)
+    {
+        if (battleManager.playerTurn) return;
+
+        base.AttackSP(other);
+    }
+
+
 
     //public override void Attack()
     //{
@@ -35,11 +43,11 @@ public class Monster : Battle
         base.Defend(amount);
     }
 
-    public override void Recover(int amount)
+    public override void Recover(int HpAmount)//, int SpAmount)
     {
         if (battleManager.playerTurn) return;
 
-        base.Recover(amount);
+        base.Recover(HpAmount);//, SpAmount);
     }
 
     //public override void ShieldUP(int amount)

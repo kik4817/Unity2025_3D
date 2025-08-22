@@ -33,14 +33,15 @@ public class Player : Battle
         battleManager.TurnChange();
     }
 
-    public override void Attack2(Battle other)
+    public override void AttackSP(Battle other)
     {
         if (!battleManager.playerTurn) return;
 
-        base.Attack2(other);
+        base.AttackSP(other);
 
         battleManager.TurnChange(); // player턴을 넘겨라
     }
+
 
     //public override void Attack()
     //{
@@ -60,15 +61,39 @@ public class Player : Battle
         battleManager.TurnChange();
     }
 
-    public override void Recover(int amount)
+
+    public override void Recover(int HpAmount)//, int SpAmount)
     {
         if (!battleManager.playerTurn) return;
 
-        base.Recover(amount);
+        base.Recover(HpAmount);//, SpAmount);
 
         battleManager.TurnChange();
     }
+    public override void HpUp(int amount)
+    {
+        if (!battleManager.playerTurn) return;
 
+        base.HpUp(amount);
+
+        battleManager.TurnChange();
+    }
+    public override void SpUp(int amount)
+    {
+        if (!battleManager.playerTurn) return;
+
+        base.SpUp(amount);
+
+        battleManager.TurnChange();
+    }
+    public override void AttackUp(int amount)
+    {
+        if (!battleManager.playerTurn) return;
+
+        base.AttackUp(amount);
+
+        battleManager.TurnChange();
+    }
     public override void ShieldUP(int amount)
     {
         if (!battleManager.playerTurn) return;

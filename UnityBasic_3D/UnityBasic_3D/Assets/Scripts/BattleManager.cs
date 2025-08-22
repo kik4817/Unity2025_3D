@@ -40,10 +40,13 @@ public class BattleManager : MonoBehaviour
                 Enemy.Attack(Player);
                 break;
             case 1:
-                Enemy.Defend(5);
+                Enemy.AttackSP(Player);
                 break;
             case 2:
-                Enemy.Recover(10);
+                Enemy.Defend(5);
+                break;
+            case 3:
+                Enemy.Recover(10);//, 5);
                 break;
             default:
                 break;

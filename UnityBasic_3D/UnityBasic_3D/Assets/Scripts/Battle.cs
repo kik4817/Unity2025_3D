@@ -93,7 +93,7 @@ public abstract class Battle : MonoBehaviour
                 // 피격 시의 효과음, 이펙트, 애니메이션 ... 이벤트 실행
                 currentHP = 0;
                 Death();
-            }
+            }          
             else { }
             // 사망 시의 효과금, 이펙트, 애니메이션 ... 이벤트 실행
             return currentHP;
@@ -113,7 +113,7 @@ public abstract class Battle : MonoBehaviour
             if(currentSP<=0)
             {
                 currentSP = 0;
-            }
+            } 
             else { }
             return currentSP;
         }
@@ -173,6 +173,11 @@ public abstract class Battle : MonoBehaviour
 
     }
 
+    private void UsingSP(int amount)
+    {        
+        CurrentSP -= amount;
+    }
+
     // 죽었을 때 로직 처리하기 Die, Death :: CurrentHP 0보다 작아졌을때
     public void Death()
     {
@@ -182,17 +187,13 @@ public abstract class Battle : MonoBehaviour
 
     public abstract void Attack(Battle other);
 
-    public virtual void Attack2(Battle other)
+    public virtual void AttackSP(Battle other)
     {
+        UsingSP(10);
         int FinalDamage = (battleEntity.ATK*2 - other.battleEntity.DEF);
         if (FinalDamage <= 0) FinalDamage = 1;
         other.CurrentHP -= FinalDamage;
     }
-
-    //public virtual void Attack()
-    //{
-
-    //}
 
     public virtual void Defend(int amount)
     {
@@ -200,9 +201,24 @@ public abstract class Battle : MonoBehaviour
         isDefending = true;
     }
 
-    public virtual void Recover(int amount)
+    public virtual void Recover(int HpAmount)//, int SpAmount)
     {
-        CurrentHP += amount;
+        CurrentHP += HpAmount;        
+        //CurrentSP += SpAmount;        
+    }
+
+    public virtual void HpUp(int amount)
+    {
+        battleEntity.HP += amount;
+    }
+    public virtual void SpUp(int amount)
+    {
+        battleEntity.SP += amount;
+    }
+    public virtual void AttackUp(int amount)
+    {
+        battleEntity.ATK += amount;
+        battleUI.SetBattleUI(battleEntity);
     }
 
     public virtual void ShieldUP(int amount)

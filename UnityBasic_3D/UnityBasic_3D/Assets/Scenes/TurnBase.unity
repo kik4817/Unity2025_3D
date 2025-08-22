@@ -1405,7 +1405,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1550032046}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Attack2
+        m_MethodName: AttackSP
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1409773128}
@@ -2446,7 +2446,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1056692765}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1550032046}
+        m_TargetAssemblyTypeName: Battle, Assembly-CSharp
+        m_MethodName: AttackUp
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1056692765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2618,7 +2630,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Attack(SP)
+  m_text: 'Attack(SP)
+
+    SP -10'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3304,7 +3318,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1365002746}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1550032046}
+        m_TargetAssemblyTypeName: Battle, Assembly-CSharp
+        m_MethodName: SpUp
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1365002746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3521,6 +3547,7 @@ MonoBehaviour:
     BattleEntityDEFText: {fileID: 1683725711}
     BattleEntityCoinText: {fileID: 0}
   battleManager: {fileID: 533613153}
+  isDefending: 0
   currentHP: 0
   currentSP: 0
 --- !u!4 &1409773129
@@ -3683,6 +3710,7 @@ MonoBehaviour:
     BattleEntityDEFText: {fileID: 494071719}
     BattleEntityCoinText: {fileID: 1050062808}
   battleManager: {fileID: 533613153}
+  isDefending: 0
   currentHP: 0
   currentSP: 0
 --- !u!4 &1550032047
@@ -4291,7 +4319,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1827785738}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1550032046}
+        m_TargetAssemblyTypeName: Battle, Assembly-CSharp
+        m_MethodName: HpUp
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 20
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1827785738
 MonoBehaviour:
   m_ObjectHideFlags: 0
