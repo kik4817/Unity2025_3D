@@ -47,10 +47,12 @@ public class BattleManager : MonoBehaviour
                 Enemy.Defend(5);
                 break;
             case 3:
-                Enemy.Recover(10);//, 5);
+                Enemy.Recover();
                 break;
             default:
                 break;
         }
     }
+
+ 
 }

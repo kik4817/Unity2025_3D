@@ -12,6 +12,8 @@ namespace BattleExample
 {
     public class Player : Battle
     {
+        [SerializeField] Animator animator;
+      
         //public BattleEntity battleEntity;
 
         ////public int playerHP;
@@ -30,6 +32,8 @@ namespace BattleExample
         {
             if (!battleManager.playerTurn) return;
 
+            animator.SetTrigger("Attack");
+
             other.TakeDamge(this);
 
             battleManager.TurnChange();
@@ -39,11 +43,12 @@ namespace BattleExample
         {
             if (!battleManager.playerTurn) return;
 
+            animator.SetTrigger("Attack");
+
             base.AttackSP(other);
 
             battleManager.TurnChange(); // player턴을 넘겨라
-        }
-
+        }              
 
         //public override void Attack()
         //{
@@ -64,11 +69,11 @@ namespace BattleExample
         }
 
 
-        public override void Recover(int HpAmount)//, int SpAmount)
+        public override void Recover()
         {
             if (!battleManager.playerTurn) return;
 
-            base.Recover(HpAmount);//, SpAmount);
+            base.Recover();
 
             battleManager.TurnChange();
         }
@@ -103,6 +108,12 @@ namespace BattleExample
             base.ShieldUP(amount);
 
             battleManager.TurnChange();
+        }
+
+        public override void TakeDamge(Battle other)
+        {
+            animator.SetTrigger("Hit");
+            base.TakeDamge(other);
         }
     } 
 }

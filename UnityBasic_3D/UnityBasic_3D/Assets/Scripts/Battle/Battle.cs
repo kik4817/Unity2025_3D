@@ -1,3 +1,4 @@
+using BattleExample;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,7 +11,8 @@ public class BattleEntity
     public int HP;    
     public int SP;   
     public int ATK;
-    public int DEF;
+    public int DEF;   
+    public int COIN;   
     public string AttackType;
 
     public BattleEntity() { }
@@ -20,12 +22,13 @@ public class BattleEntity
         ATK = aTK;
     }
 
-    public BattleEntity(int hP, int sP, int aTK, int dEF)
+    public BattleEntity(int hP, int sP, int aTK, int dEF, int cOIN)
     {
         HP = hP;
         SP = sP;
         ATK = aTK;
         DEF = dEF;
+        COIN = cOIN;
     }
 }
 
@@ -45,7 +48,8 @@ public class BattleUI
         BattleEntityHPText.SetText($"HP : {battleEntity.HP}");
         BattleEntitySPText.SetText($"SP : {battleEntity.SP}");
         BattleEntityATKText.SetText($"ATK : {battleEntity.ATK}");
-        BattleEntityDEFText.SetText($"DEF : {battleEntity.DEF}");     
+        BattleEntityDEFText.SetText($"DEF : {battleEntity.DEF}");   
+        BattleEntityCoinText.SetText($"COIN : {battleEntity.COIN}");   
     }
 
     public void SetHPBar(int current, int max)
@@ -88,7 +92,6 @@ public struct BattleResource
     }
 }
 
-
 public abstract class Battle : MonoBehaviour
 {
     
@@ -97,8 +100,8 @@ public abstract class Battle : MonoBehaviour
     //public int playerHP;
     //public int playerATK;
     //public int playerDEF;
-    public BattleManager battleManager;    
-   
+    public BattleManager battleManager;
+
     public int CurrentHP
     {
         get
@@ -106,8 +109,7 @@ public abstract class Battle : MonoBehaviour
             if (currentHP <= 0)
             {
                 // 피격 시의 효과음, 이펙트, 애니메이션 ... 이벤트 실행
-                currentHP = 0;
-                Death();
+                currentHP = 0;              
             }          
             else { }
             // 사망 시의 효과금, 이펙트, 애니메이션 ... 이벤트 실행
@@ -117,7 +119,7 @@ public abstract class Battle : MonoBehaviour
         private set 
         { 
             if(value > battleEntity.HP) value = battleEntity.HP;
-            currentHP = value; 
+            currentHP = value;
         } // Battle 클래스에서 현재 체력 변수를 수정할 수 있다.
     }
 
@@ -167,11 +169,15 @@ public abstract class Battle : MonoBehaviour
     // 상대에게 데미지를 받는다 (TakeDamage) :: CurrentHP - (ATK 방어력에 따라서 감소)
     
     // 데미지를 입었다
-    public void TakeDamge(Battle other)
+    public virtual void TakeDamge(Battle other)
     {
         int FinalDamage = (other.battleEntity.ATK - battleEntity.DEF);
         if (FinalDamage <= 0) FinalDamage = 1;    
-        CurrentHP -= FinalDamage; // 상대의 공격력
+        CurrentHP -= FinalDamage; // 상대의 공격력   
+        if (CurrentHP <= 0)
+        {
+            Death();
+        }
 
         //Debug.Log($"최종데미지 : {FinalDamage}, 공격자의 공격력 : {other.battleEntity.ATK}, 공격자의 방어력 : {other.battleEntity.DEF}");
 
@@ -185,7 +191,6 @@ public abstract class Battle : MonoBehaviour
         //{
         //    // 사망 시의 효과금, 이펙트, 애니메이션 ... 이벤트 실행
         //}
-
     }
 
     private void UsingSP(int amount)
@@ -193,12 +198,44 @@ public abstract class Battle : MonoBehaviour
         CurrentSP -= amount;
     }
 
+    private void GetCoin(int amount)
+    {
+        battleEntity.COIN += amount;
+        battleUI.SetBattleUI(battleEntity);
+    }
+
+    private bool UsingCoin(int amount)
+    {
+        if(battleEntity.COIN >= amount)
+        {
+            battleEntity.COIN -= amount;
+            return true;
+        }
+        else
+        {
+            return false;
+        }       
+    }
+
     // 죽었을 때 로직 처리하기 Die, Death :: CurrentHP 0보다 작아졌을때
     public void Death()
     {
-        // 사망
-        Debug.Log($"사망했습니다. 현재 체력 : {currentHP}");
+        GetCoin(10);
+
+        gameObject.SetActive(false);     
+
+        Invoke(nameof(Respawn), 2f);
     }
+
+
+
+    private void Respawn()
+    {
+        CurrentHP = battleEntity.HP;
+        CurrentSP = battleEntity.SP;
+        gameObject.SetActive(true);
+
+    } 
 
     public abstract void Attack(Battle other);
 
@@ -208,6 +245,10 @@ public abstract class Battle : MonoBehaviour
         int FinalDamage = (battleEntity.ATK*2 - other.battleEntity.DEF);
         if (FinalDamage <= 0) FinalDamage = 1;
         other.CurrentHP -= FinalDamage;
+        if (CurrentHP <= 0)
+        {
+            Death();
+        }
     }
 
     public virtual void Defend(int amount)
@@ -216,20 +257,26 @@ public abstract class Battle : MonoBehaviour
         isDefending = true;
     }
 
-    public virtual void Recover(int HpAmounte)//, int SpAmount)
+    public virtual void Recover()
     {
-        CurrentHP += HpAmounte;
-        //CurrentSP += SpAmounte;
+        BattleResource recoverAmount = new BattleResource(30, 5);
+
+        CurrentHP += recoverAmount.HP;
+        CurrentSP += recoverAmount.SP;
     }
 
     public virtual void HpUp(int amount)
     {
         battleEntity.HP += amount;
+        battleUI.SetBattleUI(battleEntity);
     }
+
     public virtual void SpUp(int amount)
     {
         battleEntity.SP += amount;
+        battleUI.SetBattleUI(battleEntity);
     }
+
     public virtual void AttackUp(int amount)
     {
         battleEntity.ATK += amount;
@@ -238,6 +285,7 @@ public abstract class Battle : MonoBehaviour
 
     public virtual void ShieldUP(int amount)
     {
+        UsingCoin(10);
         battleEntity.DEF += amount;
         battleUI.SetBattleUI(battleEntity);
     }

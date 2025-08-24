@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +12,13 @@ namespace BattleExample
 {
     public class Monster : Battle
     {
+        [SerializeField] Animator animator;
+
         public override void Attack(Battle other)
         {
             if (battleManager.playerTurn) return;
+
+            animator.SetTrigger("Attack");
 
             // Battle컴포넌트를 가지고 있는 상대가.TakeDamage(this.BattleEntity);
             other.TakeDamge(this);
@@ -23,10 +28,10 @@ namespace BattleExample
         {
             if (battleManager.playerTurn) return;
 
+            animator.SetTrigger("Attack");
+
             base.AttackSP(other);
         }
-
-
 
         //public override void Attack()
         //{
@@ -46,20 +51,17 @@ namespace BattleExample
             base.Defend(amount);
         }
 
-        public override void Recover(int HpAmount)//, int SpAmount)
+        public override void Recover()
         {
             if (battleManager.playerTurn) return;
 
-            base.Recover(HpAmount);//, SpAmount);
+            base.Recover();
         }
 
-        //public override void ShieldUP(int amount)
-        //{
-        //    if (battleManager.playerTurn) return; 
-
-        //    base.ShieldUP(amount);
-        //}
-
-
+        public override void TakeDamge(Battle other)
+        {
+            animator.SetTrigger("Hit");
+            base.TakeDamge(other);
+        }
     } 
 }
