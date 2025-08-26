@@ -19,8 +19,10 @@ public class ReadyObject : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-       yield return new WaitForSeconds(intervalTime);
-       sr.color = Color.white;
+        yield return new WaitForSeconds(intervalTime);
+        sr.color = Color.white;
+        yield return new WaitForSeconds(intervalTime);   
+
     }
 
 }

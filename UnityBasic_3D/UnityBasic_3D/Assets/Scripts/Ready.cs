@@ -27,10 +27,4 @@ public class Ready : MonoBehaviour
         
         //readyText.text = "5";
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
