@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MonsterSpawner : MonoBehaviour
 {
     // 특정 시점, 특정 이벤트가 발생되고 나서 몹이 생성
@@ -11,7 +12,7 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] GameObject[] spawnMonsters;
     [SerializeField] int spawnCount = 5;
     [SerializeField] float spawnIntervalTime = 0.75f;
-    private Coroutine spawnCoroutine;
+    private Coroutine spawnCoroutine;    
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +59,7 @@ public class MonsterSpawner : MonoBehaviour
             int randomIndex = UnityEngine.Random.Range(0, spawnPositions.Length);
             int randomMonsterIndex = UnityEngine.Random.Range(0, spawnMonsters.Length);
             Instantiate(spawnMonsters[randomMonsterIndex], spawnPositions[randomIndex]);
+
 
             // interval 시간 후에 위에 코드를 다시 실행하라
             yield return new WaitForSeconds(spawnIntervalTime);

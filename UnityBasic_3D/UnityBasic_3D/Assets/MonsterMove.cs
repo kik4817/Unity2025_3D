@@ -11,15 +11,15 @@ public class MonsterMove : MonoBehaviour
 
     // Inspector에서 설정할 수 있는 변수
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;    
-    [SerializeField] private Rigidbody2D rigid;
+    [SerializeField] public float moveSpeed = 5f;    
+    [SerializeField] public Rigidbody2D rigid;
     private Vector2 targetVector;
 
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
 
-        SetPositionToCenter();
+        targetVector = SetPositionToCenter();
 
         rigid.velocity = targetVector.normalized * moveSpeed;
     }

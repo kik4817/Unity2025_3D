@@ -1030,9 +1030,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 1693770889}
   intervalTime: 1
-  gameObject1: {fileID: 1693770888}
-  gameObject2: {fileID: 578529410}
-  gameObject3: {fileID: 288374519}
+  gameObjects:
+  - {fileID: 1693770888}
+  - {fileID: 578529410}
+  - {fileID: 288374519}
 --- !u!4 &1920011079
 Transform:
   m_ObjectHideFlags: 0

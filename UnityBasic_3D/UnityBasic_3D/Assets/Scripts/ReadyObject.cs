@@ -11,10 +11,7 @@ public class ReadyObject : MonoBehaviour
 
     [SerializeField] SpriteRenderer sr;
     [SerializeField] float intervalTime = 1f;
-    [SerializeField] GameObject gameObject1; 
-    [SerializeField] GameObject gameObject2; 
-    [SerializeField] GameObject gameObject3; 
-
+    [SerializeField] GameObject[] gameObjects;
 
     // Start is called before the first frame update
     IEnumerator Start()
