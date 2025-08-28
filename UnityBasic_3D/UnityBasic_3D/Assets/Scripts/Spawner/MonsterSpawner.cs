@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Example;
 
 
 public class MonsterSpawner : MonoBehaviour
@@ -10,9 +11,12 @@ public class MonsterSpawner : MonoBehaviour
     [Header("몬스터 생성 정보")]
     [SerializeField] Transform[] spawnPositions;
     [SerializeField] GameObject[] spawnMonsters;
+    [SerializeField] MonsterInfo[] monsterinfos;
+
     [SerializeField] int spawnCount = 5;
     [SerializeField] float spawnIntervalTime = 0.75f;
-    private Coroutine spawnCoroutine;    
+    private Coroutine spawnCoroutine;
+    private Monster monster = new(); //new Monster() = new()
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,21 @@ public class MonsterSpawner : MonoBehaviour
         {
             Spawn();
         }
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            monster = ConstructMonster();
+            monster.MonsterConstructor();
+        }
+    }
+
+    // monster의 데이터를 생성해주는 함수
+    public Monster ConstructMonster()
+    {
+        Monster newMonster = new();
+        int rd = UnityEngine.Random.Range(0, monsterinfos.Length);
+        newMonster.monsterInfo = monsterinfos[rd]; //monsterInfos 배열 중에서 하나를 선택하라.
+        return newMonster;
     }
 
     // <summary>
@@ -34,6 +53,7 @@ public class MonsterSpawner : MonoBehaviour
     // 한번에 몬스터가 등장할 것인가, 시간 걸쳐서 서서히 생상할 것인가
     // 유니티에서 함수 이름이 Spawn이고 위의 두줄의 기능을 하는 함수를 만들어줘
     // </summary>
+
     public void Spawn()
     {
         if (spawnCoroutine != null)
