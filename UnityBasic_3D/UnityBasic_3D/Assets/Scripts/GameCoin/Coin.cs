@@ -25,5 +25,7 @@ public class Coin : MonoBehaviour
             // 이벤트 코드를 실행시키는 형태
             // Bus<T>.Raise(new T());
         }
+
+        Bus<IScoreUpdateEvent>.Raise(new IScoreUpdateEvent(5));
     }
 }
