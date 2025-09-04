@@ -12,19 +12,43 @@ public class GameEventUI : MonoBehaviour
     public Image NpcSprite;
     public TextMeshProUGUI NpcName;
     public TextMeshProUGUI NpcDialogue;
+
+    [Header("GameOver UI")]
+    public GameObject GameOverPanel;
+
+    [Header("GameClear UI")]
+    public GameObject GameClearPanel;
+    private void Start()
+    {
+        // 유니티 씬에서 실수로 활성화 해둔 상태여도, 코드로 비활성화 해준다.
+        NPCPanel.SetActive(false);
+        GameOverPanel.SetActive(false);
+        GameClearPanel.SetActive(false);
+    }
+
     private void OnEnable()
     {
         Bus<ICollisionWithPlayerEvent>.OnEvent += HandleNPCUI;
+        Bus<IGameOverEvent>.OnEvent += HandleGameOver;
+        Bus<IGameClearEvent>.OnEvent += HandleGameClear;
     }
 
     private void OnDisable()
     {
         Bus<ICollisionWithPlayerEvent>.OnEvent -= HandleNPCUI;        
+        Bus<IGameOverEvent>.OnEvent -= HandleGameOver;
+        Bus<IGameClearEvent>.OnEvent -= HandleGameClear;
     }
 
-    private void Start()
+    private void HandleGameClear(IGameClearEvent evt)
     {
-        NPCPanel.SetActive(false);
+        GameClearPanel.SetActive(true);
+    }
+
+    private void HandleGameOver(IGameOverEvent evt) // 여러분을 처치한 대상에 따라서 GameOver 내용이 바뀌는 UI
+    {
+        Time.timeScale = 0f;
+        GameOverPanel.SetActive(true);
     }
 
     private void HandleNPCUI(ICollisionWithPlayerEvent evt)
@@ -34,7 +58,5 @@ public class GameEventUI : MonoBehaviour
        NpcSprite.sprite = evt.npc.npcInfo.Sprite;
        NpcName.SetText(evt.npc.npcInfo.NpcName);
        NpcDialogue.SetText(evt.npc.npcInfo.NpcDialogue);
-        
-        
     }
 }
