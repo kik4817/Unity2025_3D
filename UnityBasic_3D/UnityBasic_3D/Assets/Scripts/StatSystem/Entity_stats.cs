@@ -18,8 +18,24 @@ public class Entity_stats : MonoBehaviour
     private void Awake()
     {
         StatData = (Entity_statsData)statData.Clone();
-        StatData.Vitality.AddModifier(5, "Item"); // 아이템으로 인해 체력스탯이 5가 상승했다.
     }
 
+    public Stat GetStatByType(StatType type)
+    {
+        switch (type)
+        {
+            case StatType.Strength: return StatData.Strength;
+            case StatType.Dexerity: return StatData.Dexerity;
+            case StatType.Intelligence: return StatData.Intelligence;
+            case StatType.Vitality: return StatData.Vitality;
+            case StatType.UnDefined:
+                {
+                    Debug.LogError("지정된 StatType이 존재하지 않습니다.");
+                    return null;
+                }
+            default: return null;
+        }
+    }
+    
     //public float GetPhysicalAttack() { }
 }

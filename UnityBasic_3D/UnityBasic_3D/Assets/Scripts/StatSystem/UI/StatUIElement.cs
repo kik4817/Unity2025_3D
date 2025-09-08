@@ -12,5 +12,4 @@ public class StatUIElement : MonoBehaviour
     {
         valueText.SetText(value.ToString());
     }
-
 }
